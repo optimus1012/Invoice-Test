@@ -76,6 +76,12 @@
             .print-btn {
                 display: none !important;
             }
+            
+            /* Hide delete column and buttons when printing */
+            #productTable th:last-child,
+            #productTable td:last-child {
+                display: none !important;
+            }
         }
 
         .print-btn {
@@ -107,7 +113,7 @@
                 <div style="position: absolute; top: 5px; right: 10px; font-size: 14px;">
                     <strong>Mobile:</strong> <span >98246 59646</span>
                 </div>
-                SHIFA STEEL INDUSTRY
+                    <span class="editable" contenteditable="true">SHIFA STEEL INDUSTRY</span>
                 </td>
             </tr>
             <tr>
@@ -154,6 +160,7 @@
                 <th style="width:10%" id="qty">Unit</th>
                 <th style="width:10%" id="qty">Rate</th>
                 <th style="width:15%" id="amount">Amount</th>
+                <th style="width:10%">Delete</th>
             </tr>
             <tr>
             </tr>
@@ -183,7 +190,7 @@
                         <tr style="height: 42.5px;">
                             <td style="vertical-align: middle;"><strong>A/C Number:-</strong></td>
                             <td style="text-align: center; vertical-align: middle;">
-                                47002000001387</td>
+                                047002000001387</td>
                         </tr>
                         <tr style="height: 42.5px;">
                             <td style="vertical-align: middle;"><strong>IFSC CODE:-</strong></td>
@@ -236,7 +243,7 @@
             </tr>
             <tr>
                 <td style="width:30%; padding: 10px; text-align: right; vertical-align: bottom;">
-                    <div style="margin-bottom: 55px;"><strong>FOR, SHIFA MAN POWER</strong></div>
+                    <div style="margin-bottom: 55px;"><strong>FOR, <span contenteditable="true">SHIFA MAN POWER</span></strong></div>
                     <div><strong>AUTHORIZED SIGNATORY.</strong></div>
                 </td>
             </tr>

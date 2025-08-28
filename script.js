@@ -3,25 +3,46 @@ function addRow() {
   const newRow = table.insertRow(table.rows.length - 1); // Add at end
   const rowCount = table.rows.length - 2; // Exclude header
 
-  for (let i = 0; i < 7; i++) {
+  for (let i = 0; i < 8; i++) {
     const cell = newRow.insertCell(i);
-    cell.contentEditable = "true";
-
-    // Center-align for specific columns
-    if ([2, 3, 4, 5, 6].includes(i)) {
+    if (i < 7) {
+      cell.contentEditable = "true";
+      // Center-align for specific columns
+      if ([2, 3, 4, 5, 6].includes(i)) {
+        cell.style.textAlign = "center";
+      }
+      if (i === 0) {
+        cell.textContent = rowCount; // S.No.
+      } else if (i === 3 || i === 5) {
+        // Qty or Rate: recalculate on blur
+        cell.addEventListener("blur", () => calculateRowAmount(newRow));
+      } else if (i === 6) {
+        // Amount cell - calculated only
+        cell.contentEditable = "false";
+        cell.textContent = "0.00";
+      }
+    } else {
+      // Delete button cell
+      cell.contentEditable = "false";
+      const btn = document.createElement('button');
+      btn.textContent = 'Delete';
+      btn.onclick = function() {
+        newRow.remove();
+        updateSerialNumbers();
+        calculateTotalAmount();
+      };
+      cell.appendChild(btn);
       cell.style.textAlign = "center";
     }
+  }
+}
 
-    if (i === 0) {
-      cell.textContent = rowCount; // S.No.
-    } else if (i === 3 || i === 5) {
-      // Qty or Rate: recalculate on blur
-      cell.addEventListener("blur", () => calculateRowAmount(newRow));
-    } else if (i === 6) {
-      // Amount cell - calculated only
-      cell.contentEditable = "false";
-      cell.textContent = "0.00";
-    }
+// Update S.No. after row deletion
+function updateSerialNumbers() {
+  const table = document.getElementById('productTable');
+  let serial = 1;
+  for (let i = 1; i < table.rows.length - 1; i++) {
+    table.rows[i].cells[0].textContent = serial++;
   }
 }
 
